@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>.:: emuCMS administration::.</title>
+	<%= stylesheet_link_tag("admin_style") %>		
+</head>
+<body>
+	<div id="container">
+	<%= render :partial => '/users/user_bar' %>
+	
+	<% if logged_in? -%>
+		 <div id="nav">
+		 <ul>			  
+			  <li id="clanci"><a href="/articles">Članci</a></li>			  
+			  <li id="unesi"><a href="/articles/new"><span class="underline">Unesi novi članak</span></a></li> 
+		 </ul>
+		 <ul>			  
+			<li id="kategorije"><a href="/categories">Kategorije</a></li>
+			<!--li id="arhiva"><a href="archive.php">Arhiva</a></li-->
+			<li id="unesi"><a href="/categories/new"><span class="underline">Nova kategorija</span></a></li> 
+		 </ul>		 
+		 <ul>
+		  <li id="komentari"><a href="comments.php">Komentari</a></li>	              
+		  <li id="zavrsi"><a href="index.php?logout=1">Završi</a></li> 
+		 </ul>
+		 <h1>EmuSoft</h1>  	
+ 	</div>
+	<a href="#" onclick="Effect.toggle('nav','slide'); return false;">menu</a>		
+		
+		
+ 		
+	<div id="red_line" class="clr">	
+		<form action="article.php" method="post">
+
+			<fieldset><legend>Odaberi kategoriju / Traži</legend>
+			<label title="Odaberi kategoriju"><select name="cat_id" onchange="submit(this)">
+				<option value="" selected="selected">- Sve kategorije -</option>
+					
+				<option value="28" >O Attacku</option>
+					
+				<option value="29" >Projekti</option>
+					
+				<option value="30" >Linkovi</option>
+
+					
+				<option value="31" >Kontakt</option>
+				
+			</select></label>
+			<label title="Unesi traženu riječ"><input type="text" name="search" class="search" /></label>
+			<label title="Traži"><input type="image" src="images/search.gif" class="button" /></label>
+			</fieldset>
+		</form>
+	</div>
+	<% end %>
+	
+    <%= yield %>
+	</div>
+</body>
+</html>

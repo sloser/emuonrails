@@ -1,0 +1,31 @@
+	<h3>Ukupno kategorija: <%= @total_categories %></h3>
+	
+	<table border="0" cellpadding="0" cellspacing="0" id="main">
+	  <tr class="titles">
+		<td class="title">Naslov</td>
+		<td class="edit">Uredi</td>
+		<td class="category">Kategorija</td>
+		<td class="archive">Arhiviraj</td>
+
+		<td class="date">Datum</td>
+		<td class="order">Poredak</td>
+	  </tr>
+	
+	<% for category in @categories %>
+	<%	
+		
+		@cnt = @cnt + 1
+		css_class = @cnt % 2 != 0 ? ' class="darker"' : ''
+	%>	
+	<tr<%= css_class %>>
+		<td class="title"><a href="add_article.php?id=31"><%= category.title %></a></td>
+		<td class="edit"><a href="add_article.php?id=31">Uredi</a></td>
+		<td class="category">O Attacku</td>
+
+		<td class="archive"><a href="to_archive.php?table=article&id=31" onclick="return confirm('Jeste 100% sigurni da želite arhivirati članak O Attacku text ?')"">Arhiviraj</a></td>
+		<td class="date"><%= category.created_at %></td>
+		<td class="order"><label title="Poredaj tekstove"><input name="disorder[31]"  value="" type="text" size="3" /></label></td>
+	 </tr>
+	<%- end %>	
+	
+	</table>

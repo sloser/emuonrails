@@ -1,0 +1,25 @@
+<div id="login">	
+	<h1>Log In</h1>
+	<div id="loginbox">
+		<fieldset>
+		<legend><strong>Autorizacija</strong></legend>
+		<% form_tag session_path do -%>
+			<p><label for="login">Login:</label><br/>
+			<%= text_field_tag 'login', @login, :class => 'input' %></p>
+			
+			<p><label for="password">Password:</label><br/>
+			<%= password_field_tag 'password', nil, :class => 'input'  %></p>
+			
+			
+			<p><label for="remember_me">Remember me:</label>
+			<%= check_box_tag 'remember_me', '1', @remember_me, :class => 'box' %></p>
+			
+			
+			<p><%= submit_tag 'LOG IN', :class => 'button' %></p>
+		<% end -%>
+		</fieldset>	
+	</div>
+	<div id="disclaimer">
+		<p>code by: <a href="http://www.emusoft.org">emuSoft</a></p>		
+	</div>
+</div>

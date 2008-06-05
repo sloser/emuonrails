@@ -1,0 +1,8 @@
+
+<%= error_messages_for :category %>
+<% form_for :category, :url => 'create' do |f| -%>
+<p><label for="login">Title</label><br/>
+<%= f.text_field :title %></p>
+
+<p><%= submit_tag 'Create' %></p>
+<% end -%>

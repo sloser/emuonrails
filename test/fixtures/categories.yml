@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  parent_category_id: 1
+  category_code: MyString
+  language_id: 1
+  show_in_menu: 1
+  disorder: 1.5
+
+two:
+  title: MyString
+  parent_category_id: 1
+  category_code: MyString
+  language_id: 1
+  show_in_menu: 1
+  disorder: 1.5
