@@ -1,11 +1,13 @@
 
 <%= error_messages_for :article %>
-<% form_for :article, :url => 'create' do |f| -%>
+<% form_for :article, :url => 'create', :html => { :multipart => true } do |f| -%>
 <p><label for="login">Title</label><br/>
 <%= f.text_field :title %></p>
 
 <p><label for="email">Category</label><br/>
 <%= select ("article", "category_id", @categories.map {|c| [c.title,c.id]}) %></p>
+
+<p><%= f.file_field :uploaded_data %></p>
 
 <p><%= submit_tag 'Create' %></p>
 <% end -%>
