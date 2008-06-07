@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080605224648) do
+ActiveRecord::Schema.define(:version => 20080607112038) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -25,7 +25,19 @@ ActiveRecord::Schema.define(:version => 20080605224648) do
     t.float    "disorder"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "filename",         :limit => nil
+  end
+
+  create_table "articles_images", :force => true do |t|
+    t.integer  "article_id"
+    t.integer  "parent_id"
+    t.integer  "size"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "content_type"
+    t.string   "filename"
+    t.string   "thumbnail"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "categories", :force => true do |t|

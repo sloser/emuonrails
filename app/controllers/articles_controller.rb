@@ -20,8 +20,11 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(params[:article])    
-    if @article.save
+    @article  = Article.new(params[:article])
+    @image    = ArticlesImage.new(:uploaded_data => params[:filename])
+    @service  = ArticleService.new(@article, @image)
+    
+    if @service.save
       redirect_to :action => "index"
     else
       render :action => "new"      
