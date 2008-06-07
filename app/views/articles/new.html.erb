@@ -7,7 +7,7 @@
 <p><label for="email">Category</label><br/>
 <%= select ("article", "category_id", @categories.map {|c| [c.title,c.id]}) %></p>
 
-<p><%= f.file_field :filename %></p>
+<p><%= file_field_tag :image_name %></p>
 
 <p><%= submit_tag 'Create' %></p>
 <% end -%>

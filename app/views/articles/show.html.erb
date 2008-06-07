@@ -1,2 +1,4 @@
-<h1>Articles#show</h1>
-<p>Find me in app/views/articles/show.html.erb</p>
+<p><%= @article.title %></p>
+<p><%= show_image_for(@article, :s_thumb) %></p>
+<p><%= show_image_for(@article, :l_thumb) %></p>
+<p><%= show_image_for(@article) %></p>

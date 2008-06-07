@@ -8,6 +8,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    @article = Article.find(params[:id])
   end
 
   def new
@@ -19,9 +20,9 @@ class ArticlesController < ApplicationController
     @categories = Category.find :all, :select => 'id, title'
   end
 
-  def create
+  def create    
     @article  = Article.new(params[:article])
-    @image    = ArticlesImage.new(:uploaded_data => params[:filename])
+    @image    = ArticlesImage.new(:uploaded_data => params[:image_name])
     @service  = ArticleService.new(@article, @image)
     
     if @service.save

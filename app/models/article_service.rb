@@ -12,7 +12,7 @@ class ArticleService
 		begin
 		Article.transaction do
 			if @image.new_record?
-				@article.image.destroy if @article.image
+				@article.articles_image.destroy if @article.articles_image
 				@image.article = @article
 				@image.save!
 			end
