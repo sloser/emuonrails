@@ -4,7 +4,20 @@ class ArticlesController < ApplicationController
   layout "users"
   
   def index    
-    @articles = Article.find_all    
+    
+    limit = 10            
+    @articles = Article.find_all_articles(params[:page], limit)
+    @total_articles = Article.count
+    
+    respond_to do |format|
+      format.html 
+      format.js do
+        render :update do |page|
+          page.replace_html 'list_of_articles', :partial => "articles"
+        end
+      end
+    end
+    
   end
 
   def show

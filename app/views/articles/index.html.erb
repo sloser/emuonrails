@@ -1,5 +1,7 @@
-	<h3>Ukupno članaka: <%= @articles.size %></h3>
+	<h3>Ukupno članaka: <%= @total_articles %></h3>	
 	
+	<div id="list_of_articles">
+	<%= will_paginate @articles %>	
 	<table border="0" cellpadding="0" cellspacing="0" id="main">
 	  <tr class="titles">
 		<td class="title">Naslov</td>
@@ -9,7 +11,7 @@
 
 		<td class="date">Datum</td>
 		<td class="order">Poredak</td>
-	  </tr>
+	  </tr>  
 	
 	<% for article in @articles %>
 	<%			
@@ -18,7 +20,7 @@
 		css_class = cnt.odd? ? ' class="darker"' : ''
 	%>	
 	<tr<%= css_class %>>
-		<td class="title"><a href="articles/edit/<%= article.id %>"><%= article.article_title %></a></td>
+		<td class="title"><%= article.id %>. <a href="articles/edit/<%= article.id %>"><%= article.article_title %></a></td>
 		<td class="edit"><a href="articles/edit/<%= article.id %>">Uredi</a></td>
 		<td class="category"><%= article.category_title %></td>
 
@@ -27,5 +29,6 @@
 		<td class="order"><label title="Poredaj tekstove"><input name="disorder[31]"  value="" type="text" size="3" /></label></td>
 	 </tr>
 	<%- end %>	
-	
-	</table>
+	</table>		
+	<%= will_paginate @articles %>		
+	</div>

@@ -2,19 +2,20 @@ class CategoriesController < ApplicationController
   
   layout "users"
   
-  def index
-    @cnt = 0
-    @categories = Category.find :all    
-    @total_categories = @categories.size   
+  def index    
+    @categories = Category.find :all        
   end
 
   def show
   end
 
   def new
+    @categories = Category.find :all, :select => 'id, title'
   end
 
   def edit
+    @category = Category.find(params[:id])
+    @categories = Category.find :all, :select => 'id, title'
   end
 
   def create
@@ -28,6 +29,12 @@ class CategoriesController < ApplicationController
   end
 
   def update
+    @category = Category.find(params[:id])    
+    if @category.update_attributes(params[:category])        
+      redirect_to :action => "index"
+    else
+      render :action => "edit"    
+    end  
   end
 
   def destroy
