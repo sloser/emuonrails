@@ -1,6 +1,6 @@
 
 <%= error_messages_for :article %>
-<% form_for :article, :url => 'create', :html => { :multipart => true } do |f| -%>
+<% form_for @article, :html => { :multipart => true } do |f| -%>
 <p><label for="login">Title</label><br/>
 <%= f.text_field :title %></p>
 
@@ -9,5 +9,5 @@
 
 <p><%= file_field_tag :image_name %></p>
 
-<p><%= submit_tag 'Create' %></p>
+<p><%= f.submit 'Create' %></p>
 <% end -%>

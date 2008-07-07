@@ -222,34 +222,37 @@ form .form input.button{
 	width: 100px;
 }
 
-/* table */ 
-table#main{font-size:110%; width:100%}
-table#main a:hover{text-decoration:underline}
-table#main tr.light{background-color:#FCFCFC}
-table#main tr.darker{background-color:#F7F6F4}
-table#main td{padding-top:4px; padding-bottom:4px; border-right-width:1px; border-right-style:solid; border-right-color:#fff}
+/* table */
 
-table#main td.title{width:200px; text-align:left; padding-left:4px; padding-right:2px}
-table#main td.title a:hover{color:#9c0404}
-table#main td.categories{
+ul#main{font-size:110%; width:100%;}
+ul#main li div{ float: left; width:129px; height: 15px; }
+ul#main li div.clear{ float: none; clear: both; width:0px; }
+ul#main a:hover{text-decoration:underline}
+ul#main .light{background-color:#FCFCFC;}
+ul#main .darker{background-color:#F7F6F4;}
+
+
+ul#main span.title{width:200px; text-align:left; padding-left:4px; padding-right:2px}
+ul#main span.title a:hover{color:#9c0404}
+ul#main span.categories{
 	width:200px;
 	padding-left:4px;
 	padding-right:2px;
 	text-align: left;
 }
-table#main td.categories a:hover{color:#9c0404}
+ul#main span.categories a:hover{color:#9c0404}
 
-table#main td.edit{width:61px; text-align:center; padding-left:4px; margin-right:1px; padding-right:2px; font-weight:bold}
-table#main td.parent{width:200px; text-align:center; padding-left:4px; margin-right:1px; padding-right:2px; font-weight:bold}
+ul#main span.edit{width:61px; text-align:center; padding-left:4px; margin-right:1px; padding-right:2px; font-weight:bold}
+ul#main span.parent{width:200px; text-align:center; padding-left:4px; margin-right:1px; padding-right:2px; font-weight:bold}
 
-table#main td.category{width:82px; text-align:center; padding-left:4px; margin-right:1px; padding-right:2px}
-table#main td.archive{width:55px; text-align:center; padding-left:4px; margin-right:1px; padding-right:2px; font-weight:bold}
-table#main td.date{width:71px; text-align:center; padding-left:4px; margin-right:1px; padding-right:2px}
-table#main td.order{width:45px; text-align:center; padding-left:4px; margin-right:1px; padding-right:2px}
-table#main td.order input{font-weight:bold; color:#9c0404; width:20px; text-align:center}
-table#main td.id{width:41px; text-align:center; padding-left:4px; margin-right:1px; padding-right:2px}/*added by sloser*/
+ul#main span.category{width:82px; text-align:center; padding-left:4px; margin-right:1px; padding-right:2px}
+ul#main span.archive{width:55px; text-align:center; padding-left:4px; margin-right:1px; padding-right:2px; font-weight:bold}
+ul#main span.date{width:71px; text-align:center; padding-left:4px; margin-right:1px; padding-right:2px}
+ul#main span.order{width:45px; text-align:center; padding-left:4px; margin-right:1px; padding-right:2px}
+ul#main span.order input{font-weight:bold; color:#9c0404; width:20px; text-align:center}
+ul#main span.id{width:41px; text-align:center; padding-left:4px; margin-right:1px; padding-right:2px}/*added by sloser*/
 
-table#main tr.titles, table#main tr.titles a{font-weight: bold;color: #9c0404;line-height: 30px;}
+ul#main li.titles, ul#main li.titles a{font-weight: bold;color: #9c0404;line-height: 30px;}
 
 
 /* numbers */
