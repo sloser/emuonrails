@@ -1,10 +1,27 @@
 <%= error_messages_for :article %>
-<% form_for @article do |f| -%>
+<% form_for :article, :url => '/articles/update/' + @article.id.to_s do |f| -%>
 <p><label for="article_title">Title</label><br/>
 <%= f.text_field :title %></p>
 
-<p><label for="caticle_categry_id">Category</label><br/>
+<p><label for="article_categry_id">Category</label><br/>
 <%= select ("article", "category_id", @categories.map {|c| [c.title,c.id]}) %></p>
 
-<p><%= f.submit 'Edit' %></p>
+<p><label for="lead">Lead</label><br/>
+<%= f.text_area :lead %></p>
+
+<p><label for="content">Content</label><br/>
+<%= f.text_area :content %></p>
+
+<p><label for="author">Author</label><br/>
+<%= f.text_field :author %></p>
+
+<p><%= file_field_tag :image_name %></p>
+
+<p><label for="from_date">Date from</label><br/>
+<%= f.date_select :from_date %></p
+
+<p><label for="to_date">Date to</label><br/>
+<%= f.date_select :to_date %></p>
+
+<p><%= submit_tag 'Edit' %></p>
 <% end -%>
