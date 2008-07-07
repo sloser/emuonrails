@@ -1,0 +1,4 @@
+tmp/*
+public/article_images/*
+db/*.sqlite3
+log/*
