@@ -11,7 +11,7 @@ class ArticleService
 		return false unless valid?
 		begin
 		Article.transaction do
-			if @image.new_record?
+			if @image.valid?
 				@article.articles_image.destroy if @article.articles_image
 				@image.article = @article
 				@image.save!
@@ -25,6 +25,6 @@ class ArticleService
 	end
 
 	def valid?
-		@article.valid? && @image.valid?
+		@article.valid? #&& @image.valid?
 	end
 end

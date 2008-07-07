@@ -49,6 +49,8 @@ class ArticlesController < ApplicationController
     @article  = Article.new(params[:article])
     @image    = ArticlesImage.new(:uploaded_data => params[:image_name])
     @service  = ArticleService.new(@article, @image)
+  
+    @article.show_forever = '1'
     
     if @service.save
       redirect_to :action => "index"
