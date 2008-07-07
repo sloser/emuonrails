@@ -1,0 +1,45 @@
+<h3>Ukupno članaka: <span id="total_articles"> <%= @total_articles %> </span></h3>	
+<%= will_paginate @pagination %>
+
+<ul id="main">
+	<li class="titles">
+	  <div class="title">Naslov</div>
+	  <div class="edit">Uredi</div>
+	  <div class="category">Kategorija</div>
+	  <div class="archive">Arhiviraj</div>
+	  <div class="date">Datum</div>
+	  <div class="last">Poredak</div>
+	  <div class="clear"></div>
+	</li>  
+  
+  <% for article in @articles %>
+  <%			
+	  cnt ||= 0
+	  cnt = cnt + 1
+	  css_class = cnt.odd? ? ' class="darker sort"' : ' class="light sort"'
+  %>	
+  <li<%= css_class %> id="row_<%= cnt %>">
+  <div class="title"><%= link_to article.title, edit_article_path(article) %></a></div>
+	<div class="edit"><%= link_to 'Uredi', edit_article_path(article) %></div>
+	<div class="category"><%= article.category.title %></div>
+
+	<div class="archive">
+	  <%= link_to_remote "Arhiviraj",
+			:url => {
+			  :controller => 'articles', :action => 'archive', :id => article.id
+			},
+			:update => {
+			  :success => "list_of_articles", :failure => "error"
+			},
+			:before => "new Effect.Fade('row_#{cnt}');",
+			  :complete => "new Effect.Highlight('row_#{cnt}');new Effect.Highlight('total_articles');"
+		%>
+	</div>
+	<div class="date"><%= article.created_at %></div>
+	<div class="order"><label title="Poredaj tekstove"><input name="disorder[<%= article.id %>]"  value="<%= article.disorder %>" type="text" size="3" /></label></div>
+	<div class="clear"></div>
+   </li>
+  <%- end %>  
+</ul>
+<%= sortable_element('main', :update => 'list_of_articles', :url => {:action => :update_positions}, :only => 'sort', :complete => visual_effect(:highlight, 'main')) %>  
+<%= will_paginate @pagination %>
