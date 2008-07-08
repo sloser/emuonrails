@@ -15,6 +15,8 @@ class ArticlesController < ApplicationController
     end
     -
     
+    @url = urlize('asbsdf dasdas')
+
     @articles = Article.find_all_active_articles(params[:page], LIMIT)
     @total_articles = Article.active.count(:id)
     
