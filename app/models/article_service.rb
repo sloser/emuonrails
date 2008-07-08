@@ -15,14 +15,16 @@ class ArticleService
 				@article.articles_image.destroy if @article.articles_image
 				@image.article = @article
 				@image.save!
-			end
+			end			
+			@article.show_forever = '1'
+			@article.article_code = @article.title.create_alias	
 			@article.save!
 			true
 		end
 		rescue
 			false
 		end
-	end
+	end	
 
 	def valid?
 		@article.valid? #&& @image.valid?

@@ -1,2 +1,5 @@
-require 'create_alias'
-ActiveSupport::CoreExtensions::String.send(:include, CreateAlias)
+require "create_alias"
+
+class ActiveRecord::Base
+  extend CreateAlias
+end

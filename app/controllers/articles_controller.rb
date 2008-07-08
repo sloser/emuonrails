@@ -13,9 +13,7 @@ class ArticlesController < ApplicationController
       a.show_forever = '1'
       a.save
     end
-    -
-    
-    @url = urlize('asbsdf dasdas')
+    -   
 
     @articles = Article.find_all_active_articles(params[:page], LIMIT)
     @total_articles = Article.active.count(:id)
@@ -50,9 +48,7 @@ class ArticlesController < ApplicationController
   def create    
     @article  = Article.new(params[:article])
     @image    = ArticlesImage.new(:uploaded_data => params[:image_name])
-    @service  = ArticleService.new(@article, @image)
-  
-    @article.show_forever = '1'
+    @service  = ArticleService.new(@article, @image)            
     
     if @service.save
       redirect_to :action => "index"
@@ -71,8 +67,7 @@ class ArticlesController < ApplicationController
   end
   
   def archive
-    article = Article.find(params[:id])
-    #article.date_from = '0000-00-00'
+    article = Article.find(params[:id])    
     article.show_forever = '0'
     article.save
     redirect_to :action => "index", :ajax => 1 
@@ -83,12 +78,19 @@ class ArticlesController < ApplicationController
   
   def update_positions   
   	params[:main].each_index do |i|
-    	item = Article.find(params[:main][i])
-    	item.disorder = i + 1
-    	item.save  	end    
+      item = Article.find(params[:main][i])
+      item.disorder = i + 1
+      item.save
+    end    
         
         @articles = Article.find_all_active_articles(params[:page], LIMIT)
 		render :layout => false, :action => :index
 	end
+  
+  private
+  
+  def get_title (string)
+    string
+  end
 
 end

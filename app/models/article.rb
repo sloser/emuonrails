@@ -4,7 +4,7 @@ class Article < ActiveRecord::Base
 	belongs_to 	:category,
 				:select => 'title'
 				
-	named_scope :active, :conditions => "show_forever='1' OR (from_date <= CURRENT_DATE AND to_date > CURRENT_DATE)"				
+	named_scope :active, :conditions => "show_forever='1' OR (from_date <= CURRENT_DATE AND to_date > CURRENT_DATE)"	
 	
 	
 	def self.find_all_active_articles(page, limit)
@@ -15,7 +15,7 @@ class Article < ActiveRecord::Base
 									created_at,
 									disorder',
 					:conditions => "show_forever='1' OR (from_date <= CURRENT_DATE AND to_date > CURRENT_DATE)",
-					:order 		=> 'disorder',					
+					:order 		=> 'disorder, id DESC',					
 					:page 		=> page,
 					:per_page 	=> limit
 	end
