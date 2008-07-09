@@ -7,8 +7,8 @@ one:
   lead: MyText
   content: MyText
   author: MyString
-  homepage: 1
-  forever: 1
+  show_on_homepage: 1
+  show_forever: 1
   from_date: 2008-06-04
   to_date: 2008-06-04
   disorder: 1.5
@@ -20,8 +20,8 @@ two:
   lead: MyText
   content: MyText
   author: MyString
-  homepage: 1
-  forever: 1
+  show_on_homepage: 1
+  show_forever: 1
   from_date: 2008-06-04
   to_date: 2008-06-04
   disorder: 1.5
