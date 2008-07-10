@@ -6,17 +6,14 @@ class ArticlesController < ApplicationController
   LIMIT = 10
   
   def index    
-    %-
-    aa = Article.all
-    
-    for a in aa
-      a.show_forever = '1'
-      a.save
-    end
-    -   
-
-    @articles = Article.find_all_active_articles(params[:page], LIMIT)
-    @total_articles = Article.active.count(:id)
+    #active_all
+    @archive = params[:archive] ? true : false
+    @articles = Article.find_all_active_articles(params[:page], LIMIT, @archive)
+    if @archive
+      @total_articles = Article.archive.count(:id)
+    else    
+      @total_articles = Article.active.count(:id)
+    end  
     
     respond_to do |format|     
       format.html do
@@ -27,8 +24,7 @@ class ArticlesController < ApplicationController
           page.replace_html 'list_of_articles', :partial => "list"
         end
       end
-    end  
-    
+    end    
   end
 
   def show
@@ -58,8 +54,12 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.find(params[:id])    
-    if @article.update_attributes(params[:article])        
+    @article_id     = params[:id]
+    @article        = params[:article]
+    @image          = ArticlesImage.new(:uploaded_data => params[:image_name])
+    @service        = ArticleService.new(@article, @image, @article_id)
+    
+    if @service.update        
       redirect_to :action => "index"
     else
       render :action => "edit"    
@@ -73,7 +73,16 @@ class ArticlesController < ApplicationController
     redirect_to :action => "index", :ajax => 1 
   end
 
+  def dearchive
+    article = Article.find(params[:id])    
+    article.show_forever = '1'
+    article.save
+    redirect_to :controller => "archive", :ajax => 1 
+  end
+
   def destroy
+    Article.delete(params[:id])    
+    redirect_to :controller =>"archive", :ajax => 1
   end
   
   def update_positions   
@@ -89,8 +98,13 @@ class ArticlesController < ApplicationController
   
   private
   
-  def get_title (string)
-    string
+  def active_all
+    aa = Article.all
+    
+    for a in aa
+      a.show_forever = '1'
+      a.save
+    end
   end
 
 end

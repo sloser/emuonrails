@@ -1,5 +1,5 @@
 <%= error_messages_for :article %>
-<% form_for :article, :url => '/articles/update/' + @article.id.to_s do |f| -%>
+<% form_for :article, :url => '/articles/update/' + @article.id.to_s, :html => { :multipart => true } do |f| -%>
 <p><label for="article_title">Title</label><br/>
 <%= f.text_field :title %></p>
 

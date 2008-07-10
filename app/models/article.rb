@@ -5,16 +5,22 @@ class Article < ActiveRecord::Base
 				:select => 'title'
 				
 	named_scope :active, :conditions => "show_forever='1' OR (from_date <= CURRENT_DATE AND to_date > CURRENT_DATE)"	
+	named_scope :archive, :conditions => "show_forever='0' OR (from_date > CURRENT_DATE AND to_date <= CURRENT_DATE)"
 	
-	
-	def self.find_all_active_articles(page, limit)
+	def self.find_all_active_articles(page, limit, archive=nil)
 		
+    if archive
+      active_sql = "show_forever='0' OR (from_date > CURRENT_DATE AND to_date <= CURRENT_DATE)"      
+    else    
+      active_sql = "show_forever='1' OR (from_date <= CURRENT_DATE AND to_date > CURRENT_DATE)"
+    end
+
 		paginate	:select		=> 'id,
 									category_id,
 									title,
 									created_at,
 									disorder',
-					:conditions => "show_forever='1' OR (from_date <= CURRENT_DATE AND to_date > CURRENT_DATE)",
+					:conditions => active_sql,
 					:order 		=> 'disorder, id DESC',					
 					:page 		=> page,
 					:per_page 	=> limit

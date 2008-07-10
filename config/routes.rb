@@ -5,6 +5,8 @@ ActionController::Routing::Routes.draw do |map|
   map.register  '/register',  :controller => 'users',     :action => 'create'
   map.signup    '/signup',    :controller => 'users',     :action => 'new'  
   
+  map.archive    '/archive',  :controller => 'articles',  :archive => 1
+
   map.disorder  '/articles/update_positions',  :controller => 'articles',  :action => 'update_positions'
   map.resources :articles
   map.resources :users

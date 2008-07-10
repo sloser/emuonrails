@@ -22,7 +22,32 @@
   <div class="title"><%= link_to article.title, edit_article_path(article) %></a></div>
 	<div class="edit"><%= link_to 'Uredi', edit_article_path(article) %></div>
 	<div class="category"><%= article.category.title %></div>
-
+  
+  <% if @archive %>
+  <div class="archive">
+	  <%= link_to_remote "Dearhiviraj",
+			:url => {
+			  :controller => 'articles', :action => 'dearchive', :id => article.id
+			},
+			:update => {
+			  :success => "list_of_articles", :failure => "error"
+			},
+			:before => "new Effect.Fade('row_#{cnt}');",
+			  :complete => "new Effect.Highlight('row_#{cnt}');new Effect.Highlight('total_articles');"
+		%>
+	-::-
+	  <%= link_to_remote "Obriši",
+			:url => {
+			  :controller => 'articles', :action => 'destroy', :id => article.id
+			},
+			:update => {
+			  :success => "list_of_articles", :failure => "error"
+			},
+			:before => "new Effect.Fade('row_#{cnt}');",
+			  :complete => "new Effect.Highlight('row_#{cnt}');new Effect.Highlight('total_articles');"
+		%>
+	</div>
+  <% else %>
 	<div class="archive">
 	  <%= link_to_remote "Arhiviraj",
 			:url => {
@@ -35,6 +60,7 @@
 			  :complete => "new Effect.Highlight('row_#{cnt}');new Effect.Highlight('total_articles');"
 		%>
 	</div>
+  <% end %>
 	<div class="date"><%= article.created_at %></div>
 	<div class="order"><label title="Poredaj tekstove"><input name="disorder[<%= article.id %>]"  value="<%= article.disorder %>" type="text" size="3" /></label></div>
 	<div class="clear"></div>
