@@ -38,7 +38,7 @@
 	-::-
 	  <%= link_to_remote "Obriši",
 			:url => {
-			  :controller => 'articles', :action => 'destroy', :id => article.id
+			  :controller => 'articles', :action => 'delete', :id => article.id
 			},
 			:update => {
 			  :success => "list_of_articles", :failure => "error"

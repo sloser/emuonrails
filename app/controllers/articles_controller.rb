@@ -80,7 +80,7 @@ class ArticlesController < ApplicationController
     redirect_to :controller => "archive", :ajax => 1 
   end
 
-  def destroy
+  def delete
     Article.delete(params[:id])    
     redirect_to :controller =>"archive", :ajax => 1
   end
@@ -92,7 +92,7 @@ class ArticlesController < ApplicationController
       item.save
     end    
         
-        @articles = Article.find_all_active_articles(params[:page], LIMIT)
+    @articles = Article.find_all_active_articles(params[:page], LIMIT)
 		render :layout => false, :action => :index
 	end
   
