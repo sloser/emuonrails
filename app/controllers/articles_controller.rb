@@ -6,7 +6,8 @@ class ArticlesController < ApplicationController
   LIMIT = 10
   
   def index    
-    #active_all
+    #active_all('show_forever')
+    #active_all('show_on_homepage')
     @archive = params[:archive] ? true : false
     @articles = Article.find_all_active_articles(params[:page], LIMIT, @archive)
     if @archive
@@ -98,11 +99,11 @@ class ArticlesController < ApplicationController
   
   private
   
-  def active_all
+  def active_all(field)
     aa = Article.all
     
     for a in aa
-      a.show_forever = '1'
+      a.show_on_homepage = '1'
       a.save
     end
   end

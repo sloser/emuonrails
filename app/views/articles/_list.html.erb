@@ -1,6 +1,6 @@
 <h3>Ukupno članaka: <span id="total_articles"> <%= @total_articles %> </span></h3>	
 <%= will_paginate @pagination %>
-
+<% form_for :article, :url => '/articles/update_positions' do |f| %>
 <ul id="main">
 	<li class="titles">
 	  <div class="title">Naslov</div>
@@ -67,5 +67,7 @@
    </li>
   <%- end %>  
 </ul>
+<p><%= submit_tag 'Sort' %></p>
+<% end -%>
 <%= sortable_element('main', :update => 'list_of_articles', :url => {:action => :update_positions}, :only => 'sort', :complete => visual_effect(:highlight, 'main')) %>  
 <%= will_paginate @pagination %>
