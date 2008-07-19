@@ -6,7 +6,7 @@ class FrontendController < ApplicationController
   end
 
   def overview
-    @articles = Article.find_all_by_category_code(params[:category_code])
+    @articles = Article.category_articles(params[:category_code])
   end
 
   def view

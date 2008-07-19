@@ -12,6 +12,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resource  :session 
   
+  map.create    '/articles/create', :controller => 'articles', :action => 'create'
+
   map.overview ':category_code',                :controller => 'frontend', :action => 'overview'
   map.overview ':category_code/:article_code',  :controller => 'frontend', :action => 'view'  
   

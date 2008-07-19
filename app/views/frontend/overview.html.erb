@@ -1,2 +1,8 @@
-<h1>Frontend#overview</h1>
-<p>Find me in app/views/frontend/overview.html.erb</p>
+<h1>Overview</h1>
+<p><%= link_to 'homepage', '/' %></p>
+<h3>articles:</h3>
+<ul>
+<% @articles.each do |a| %>
+  <li><%= link_to a.title, "/#{a.category.title}/#{a.article_code}" %></li>
+<% end %>
+</ul>

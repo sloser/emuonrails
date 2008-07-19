@@ -34,6 +34,16 @@ class Article < ActiveRecord::Base
             :conditions => 'show_on_homepage = 1'                    
 
   end
+
+  def self.category_articles(category_code)      
+  
+    self.all    :select => 'title,
+                      category_id,                  
+                      article_code',
+            :include => 'category',            
+            :conditions => "categories.title = '#{category_code}'"                    
+
+  end
 	
 	
 end
