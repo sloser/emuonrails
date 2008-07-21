@@ -9,11 +9,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.disorder  '/articles/update_positions',  :controller => 'articles',  :action => 'update_positions'
   map.resources :articles
+  map.resources :categories
   map.resources :users
   map.resource  :session 
   
-  map.create    '/articles/create', :controller => 'articles', :action => 'create'
-
   map.overview ':category_code',                :controller => 'frontend', :action => 'overview'
   map.overview ':category_code/:article_code',  :controller => 'frontend', :action => 'view'  
   

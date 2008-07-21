@@ -3,6 +3,6 @@
 <h3>articles:</h3>
 <ul>
 <% @articles.each do |a| %>
-  <li><%= link_to a.title, "/#{a.category.title}/#{a.article_code}" %></li>
+  <li><%= link_to a.title, "/#{a.category.category_code}/#{a.article_code}" %></li>
 <% end %>
 </ul>

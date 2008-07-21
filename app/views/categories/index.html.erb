@@ -1,12 +1,13 @@
 	<h3>Ukupno kategorija: <%= @categories.size %></h3>
 	
-	<table border="0" cellpadding="0" cellspacing="0" id="main">
+	<table border="0" cellpadding="10" cellspacing="0" id="main">
 	  <tr class="titles">
 		<td class="title">Naslov</td>
 		<td class="edit">Uredi</td>
 		<td class="category">Nadkategorija</td>		
 
 		<td class="date">Datum</td>
+    <td class="date">Obriši</td>
 		<td class="order">Poredak</td>
 	  </tr>
 	
@@ -23,6 +24,7 @@
 		<td class="category"><% if category.parent.nil? %>---<% else %><%= category.parent.title %><% end %></td>
 	
 		<td class="date"><%= category.created_at %></td>
+    <td class="date"><%= link_to 'Obriši', "/categories/destroy/#{category.id}" %></td>
 		<td class="order"><label title="Poredaj kategorije"><input name="disorder[31]"  value="" type="text" size="3" /></label></td>
 	 </tr>
 	<%- end %>

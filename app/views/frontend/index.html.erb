@@ -2,12 +2,12 @@
 <h3>categories:</h3>
 <ul>
 <% @categories.each do |c| %>
-  <li><%= link_to c.title, c.title %></li>
+  <li><%= link_to c.title, c.category_code %></li>
 <% end %>
 </ul>
 <h3>articles:</h3>
 <ul>
 <% @articles.each do |a| %>
-  <li><%= link_to a.title, "#{a.category.title}/#{a.article_code}" %></li>
+  <li><%= link_to a.title, "#{a.category.category_code}/#{a.article_code}" %></li>
 <% end %>
 </ul>

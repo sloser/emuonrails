@@ -1,7 +1,7 @@
 class FrontendController < ApplicationController
 
   def index
-    @categories = Category.find(:all)
+    @categories = Category.roots
     @articles = Article.homepage_articles
   end
 

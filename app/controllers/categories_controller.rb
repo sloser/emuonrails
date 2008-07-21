@@ -10,6 +10,7 @@ class CategoriesController < ApplicationController
   end
 
   def new
+    @category_new = Category.new    
     @categories = Category.find :all, :select => 'id, title'
   end
 
@@ -19,17 +20,20 @@ class CategoriesController < ApplicationController
   end
 
   def create
-     @category = Category.new(params[:category])
+    @category = Category.new(params[:category])
+    @category.category_code = @category.title.create_alias       
     
     if @category.save
       redirect_to :action => "index"
     else
+      @categories = Category.find :all, :select => 'id, title'
       render :action => "new"      
     end
   end
 
   def update
-    @category = Category.find(params[:id])    
+    @category = Category.find(params[:id])
+    @category.category_code = @category.title.create_alias    
     if @category.update_attributes(params[:category])        
       redirect_to :action => "index"
     else
@@ -38,6 +42,8 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+    Category.delete(params[:id])
+    redirect_to :action => "index"
   end
 
 end

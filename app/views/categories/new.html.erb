@@ -1,6 +1,6 @@
 
 <%= error_messages_for :category %>
-<% form_for :category, :url => 'create' do |f| -%>
+<% form_for(@category_new) do |f| -%>
 <p><label for="category_title">Title</label><br/>
 <%= f.text_field :title %></p>
 <p><label for="category_parent_category_id">Parent Category</label><br/>

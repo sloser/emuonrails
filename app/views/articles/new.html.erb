@@ -1,6 +1,6 @@
 
 <%= error_messages_for :article %>
-<% form_for :article, :url => 'create', :html => { :multipart => true } do |f| -%>
+<% form_for @article, :html => { :multipart => true } do |f| -%>
 <p><label for="article_title">Title</label><br/>
 <%= f.text_field :title %></p>
 

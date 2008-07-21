@@ -41,7 +41,7 @@ class Article < ActiveRecord::Base
                       category_id,                  
                       article_code',
             :include => 'category',            
-            :conditions => "categories.title = '#{category_code}'"                    
+            :conditions => "categories.category_code = '#{category_code}'"                    
 
   end
 	
