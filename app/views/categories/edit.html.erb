@@ -1,10 +1,10 @@
 <%= error_messages_for :category %>
-<% form_for :article, :url => '/categories/update/' + @category.id.to_s do |f| -%>
+<% form_for(@category) do |f| -%>
 <p><label for="category_title">Title</label><br/>
 <%= f.text_field :title, :value => @category.title %></p>
 
 <p><label for="category_parent_category_id">Parent Category</label><br/>
 <%= select ("category", "parent_category_id", @categories.map {|c| [c.title,c.id]}, :include_blank => true) %></p>
 
-<p><%= submit_tag 'Edit' %></p>
+<p><%= f.submit 'Edit' %></p>
 <% end -%>

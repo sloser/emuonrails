@@ -1,5 +1,5 @@
 <%= error_messages_for :article %>
-<% form_for :article, :url => '/articles/update/' + @article.id.to_s, :html => { :multipart => true } do |f| -%>
+<% form_for @article, :html => { :multipart => true } do |f| -%>
 <p><label for="article_title">Title</label><br/>
 <%= f.text_field :title %></p>
 
@@ -26,5 +26,5 @@
 <p><label for="show_on_homepage">Show on homepage</label><br/>
 <%= f.check_box :show_on_homepage %></p>
 
-<p><%= submit_tag 'Edit' %></p>
+<p><%= f.submit 'Edit' %></p>
 <% end -%>

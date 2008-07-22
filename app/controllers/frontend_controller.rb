@@ -11,6 +11,7 @@ class FrontendController < ApplicationController
 
   def view
     @article = Article.find_by_article_code(params[:article_code])
+    redirect_to :action => 'index' if @article.nil?
   end
 
 end
