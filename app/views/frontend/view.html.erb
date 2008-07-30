@@ -7,3 +7,24 @@
 <p><%= @article.created_at %></p>
 
 <%= show_image_for(@article) %>
+
+<div>
+	<% form_for @comment, :url => '/frontend/add-comment' do |f| -%>
+	<p><label for="comment_author">Author</label><br/>
+	<%= f.hidden_field :article_id, :value => @article.id %>
+	<%= hidden_field_tag :reffer, @reffer %>	
+	<%= f.text_field :author %></p>
+	
+	
+	<p><label for="content">Content</label><br/>
+	<%= f.text_area :content %></p>	
+	
+	<p><%= f.submit 'Create' %></p>
+	<% end -%>
+</div>
+
+<% @comments.each do |c|  %>
+	<p><%= c.created_at  %> | <%= c.author  %></p>
+	<p><%= c.content %></p>
+	<hr />
+<% end %>

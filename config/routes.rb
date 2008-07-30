@@ -9,12 +9,14 @@ ActionController::Routing::Routes.draw do |map|
 
   map.disorder  '/articles/update_positions',  :controller => 'articles',  :action => 'update_positions'
   map.resources :articles
-  map.resources :categories
+  map.resources :categories  
   map.resources :users
-  map.resource  :session 
+  map.resource  :session
+  
+  map.comment '/frontend/add-comment',          :controller => 'frontend', :action => 'add_comment'   
   
   map.overview ':category_code',                :controller => 'frontend', :action => 'overview'
-  map.overview ':category_code/:article_code',  :controller => 'frontend', :action => 'view'  
+  map.overview ':category_code/:article_code',  :controller => 'frontend', :action => 'view' 
   
   # The priority is based upon order of creation: first created -> highest priority.
 

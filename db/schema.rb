@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080607112038) do
+ActiveRecord::Schema.define(:version => 20080730214245) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(:version => 20080607112038) do
     t.integer  "language_id"
     t.integer  "show_in_menu",       :limit => 1
     t.float    "disorder"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.string   "author"
+    t.text     "content"
+    t.integer  "article_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
