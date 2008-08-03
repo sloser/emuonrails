@@ -20,6 +20,8 @@ class FrontendController < ApplicationController
     @article = Article.find_article(params[:category_code],params[:article_code])
     render :template => 'frontend/error' if @article.nil?
     
+    @settings = Setting.first
+    
     @related_articles   = Article.find_related_articles(@article)
     @catagory_articles  = Article.category_articles(params[:category_code], @article.id)
     

@@ -1,26 +1,30 @@
 <h1>homepage</h1>
-<h3>categories:</h3>
-<ul>
-<% @categories.each do |c| %>
-  <li><%= link_to c.title, c.category_code %></li>
-    <% unless c.children.empty? %>
-      <ul>
-        <% c.children.each do |sub| %>
-        <li><%= link_to sub.title, sub.category_code %></li>
-        <% end %>
-      </ul>
-    <% end %>
-<% end %>
-</ul>
-<h3>articles:</h3>
-<ul>
-<% @articles.each do |a| %>
-  <li><%= link_to a.title, "#{a.category.category_code}/#{a.article_code}" %></li>
-<% end %>
-</ul>
+<div id="navigation">
+  <h3>categories:</h3>
+  <ul>
+	<% @categories.each do |c| -%>
+	<li><%= link_to c.title, c.category_code %></li>
+	<% unless c.children.empty? -%>
+  <ul>
+	<% c.children.each do |sub| -%>
+	<li><%= link_to sub.title, sub.category_code %></li>
+	<% end -%>
+  </ul>
+	<% end -%>
+  <% end -%>
+  </ul>
+</div>
+<div id="homepages_articles">
+  <h3>articles:</h3>
+  <ul>
+  <% @articles.each do |a| -%>
+	<li><%= link_to a.title, "#{a.category.category_code}/#{a.article_code}" %></li>
+  <% end -%>
+  </ul>
+</div>
 
-<p> <% @tags.each do |tag| %>
-    [ <%= link_to tag.name, "/tag/#{tag.name}" %> ]
-	<% end %>
-</p>  
+<div id="tags"> <% tag_cloud @tags, %w(tag1 tag2 tag3 tag4 tag5) do |tag, css_class| %>
+    <%= link_to tag.name, "/tag/#{tag.name}", :class => css_class %>
+  <% end %>
+</div>  
 

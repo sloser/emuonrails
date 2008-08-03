@@ -1,0 +1,27 @@
+
+
+<% form_for :settings do |f| -%>
+
+<p><label for="show_comments">Show comments</label>
+	<%= f.radio_button :show_comments, true %>
+	<%= f.radio_button :show_comments, false %>
+</p>
+<p><label for="show_related_articles">Show related articles</label>
+	<%= f.radio_button :show_related_articles, true %>
+	<%= f.radio_button :show_related_articles, false %>
+</p>
+<p><label for="show_categories_articles">Show categories articles</label>
+	<%= f.radio_button :show_categories_articles, true %>
+	<%= f.radio_button :show_categories_articles, false %>
+</p>
+<p><label for="use_tags">Use tags</label>
+	<%= f.radio_button :use_tags, true %>
+	<%= f.radio_button :use_tags, false %>
+</p>
+<p><label for="use_send_to_friend">Use send to friend</label>
+	<%= f.radio_button :use_send_to_friend, true %>
+	<%= f.radio_button :use_send_to_friend, false %>
+</p>
+
+<p><%= f.submit 'Save' %></p>
+<% end -%>

@@ -7,12 +7,14 @@ ActionController::Routing::Routes.draw do |map|
   
   map.archive    '/archive',  :controller => 'articles',  :archive => 1
 
-  map.disorder  '/articles/update_positions',  :controller => 'articles',  :action => 'update_positions'
+  map.disorder  '/articles/update_positions',  :controller => 'articles',  :action => 'update_positions'  
   map.resources :articles
   map.resources :categories  
   map.resources :users
   map.resource  :session
   
+  map.autocomplete    'articles/auto_complete_for_tags_tag', :controller => 'articles', :action => 'auto_complete_for_tags_tag'  
+  map.settings        '/settings',                     :controller => 'settings', :action => 'index'  
   map.comment         '/frontend/add-comment',         :controller => 'frontend', :action => 'add_comment'
   map.tiny_mce        '/tiny_mce_photos',              :controller => 'tiny_mce_photos'
   map.tiny_mce_create '/tiny_mce_photos/create',       :controller => 'tiny_mce_photos', :action => 'create'

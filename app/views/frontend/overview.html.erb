@@ -1,10 +1,12 @@
 <h1>Overview</h1>
-<p><%= link_to 'homepage', '/' %></p>
-<% unless @articles.empty? %>
-  <h3>articles:</h3>
-  <ul>
-  <% @articles.each do |a| %>
-    <li><%= link_to a.title, "/#{a.category.category_code}/#{a.article_code}" %></li>
-  <% end %>
-  </ul>
-<% end %>
+<div id="content">
+  <div id="breadcrump"><%= link_to 'homepage', '/' %></div>
+  <% unless @articles.empty? -%>
+    <h3>articles:</h3>
+    <ul>
+    <% @articles.each do |a| -%>
+      <li><%= link_to a.title, "/#{a.category.category_code}/#{a.article_code}" %></li>
+    <% end -%>
+    </ul>
+  <% end -%>
+</div>

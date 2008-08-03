@@ -4,6 +4,9 @@ class ArticlesController < ApplicationController
   layout "users"
   uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit])
   
+  skip_before_filter :verify_authenticity_token, :only => [:auto_complete_for_tags_tag]
+  auto_complete_for :tags, :tag
+  
   LIMIT = 10
   
   def index    
@@ -40,13 +43,13 @@ class ArticlesController < ApplicationController
   def edit
     @article    = Article.find(params[:id])
     @categories = Category.find :all, :select => 'id, title'
-    @tags       = @article.tag_list
+    @tags_value = @article.tag_list
   end
 
   def create    
     @article  = Article.new(params[:article])
     @image    = ArticlesImage.new(:uploaded_data => params[:image_name])
-    @tags     = params[:tags]
+    @tags     = params[:tags][:tag].split(', ').map {|tag| tag.create_alias}
     @service  = ArticleService.new(@article, @image, nil, @tags)            
     
     if @service.save
@@ -59,7 +62,7 @@ class ArticlesController < ApplicationController
   def update
     @article_id     = params[:id]
     @article        = params[:article]
-    @tags           = params[:tags]
+    @tags           = params[:tags][:tag].split(', ').map {|tag| tag.create_alias}
     @image          = ArticlesImage.new(:uploaded_data => params[:image_name])
     
     @service        = ArticleService.new(@article, @image, @article_id, @tags)   
@@ -99,7 +102,15 @@ class ArticlesController < ApplicationController
         
     @articles = Article.find_all_active_articles(params[:page], LIMIT)
 		render :layout => false, :action => :index
-  end 
+  end
+  
+  def auto_complete_for_tags_tag
+    re = Regexp.new("^#{params[:tags][:tag]}", "i")    
+    @tags = Article.tag_counts.collect(&:name).select { |tag| tag.match re }
+        
+    render :inline => "<%= content_tag(:ul, @tags.map { |tag| content_tag(:li, h(tag)) }) %>"
+    
+  end
   
   private
   

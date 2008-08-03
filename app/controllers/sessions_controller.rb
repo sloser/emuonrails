@@ -1,8 +1,10 @@
 # This controller handles the login/logout function of the site.  
 class SessionsController < ApplicationController 
   
+  layout 'users'
+  
   def new
-    render :layout => 'users'
+    redirect_to '/articles' if logged_in?    
   end
 
   def create    
