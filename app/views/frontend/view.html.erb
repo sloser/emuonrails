@@ -1,12 +1,32 @@
 <h1>View</h1>
 <p><%= link_to 'homepage', '/' %> > <%= link_to @article.category.title, "/#{@article.category.category_code}" %></p>
 <p><%= @article.title %></p>
-<p><%= @article.lead %></p>
-<p><%= @article.content %></p>
+<%= @article.lead %>
+<%= @article.content %>
 <p><%= @article.author %></p>
 <p><%= @article.created_at %></p>
 
 <%= show_image_for(@article) %>
+
+<p><%= @tags %></p>
+
+<% unless @related_articles.empty? %>
+  <h3>related articles:</h3>
+  <ul>
+  <% @related_articles.each do |ra| %>
+    <li><%= link_to ra.title, "/#{ra.category.category_code}/#{ra.article_code}" %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<% unless @catagory_articles.empty? %>
+  <h3>category articles:</h3>
+  <ul>
+  <% @catagory_articles.each do |ca| %>
+    <li><%= link_to ca.title, "/#{ca.category.category_code}/#{ca.article_code}" %></li>
+  <% end %>
+  </ul>
+<% end %>
 
 <div>
 	<% form_for @comment, :url => '/frontend/add-comment' do |f| -%>

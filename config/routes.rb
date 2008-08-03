@@ -13,10 +13,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resource  :session
   
-  map.comment '/frontend/add-comment',          :controller => 'frontend', :action => 'add_comment'   
+  map.comment         '/frontend/add-comment',         :controller => 'frontend', :action => 'add_comment'
+  map.tiny_mce        '/tiny_mce_photos',              :controller => 'tiny_mce_photos'
+  map.tiny_mce_create '/tiny_mce_photos/create',       :controller => 'tiny_mce_photos', :action => 'create'
   
-  map.overview ':category_code',                :controller => 'frontend', :action => 'overview'
-  map.overview ':category_code/:article_code',  :controller => 'frontend', :action => 'view' 
+  map.tag_overview    '/tag/:tag',                     :controller => 'frontend', :action => 'overview'
+  map.overview        ':category_code',                :controller => 'frontend', :action => 'overview'
+  map.view            ':category_code/:article_code',  :controller => 'frontend', :action => 'view' 
   
   # The priority is based upon order of creation: first created -> highest priority.
 

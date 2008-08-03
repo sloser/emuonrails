@@ -3,6 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>.:: emuCMS administration::.</title>
+	<%= javascript_include_tiny_mce_if_used -%> 
+	<%= tiny_mce if using_tiny_mce? -%>
 	<%= stylesheet_link_tag("admin_style") %>
 	<%= javascript_include_tag :defaults %>
 	<%= javascript_include_tag 'lowpro' %>
@@ -57,7 +59,7 @@
 				
 			</select></label>
 			<label title="Unesi traženu riječ"><input type="text" name="search" class="search" /></label>
-			<label title="Traži"><input type="image" src="../images/admin/search.gif" class="button" /></label>
+			<label title="Traži"><input type="submit" value="search" class="button" /></label>
 			</fieldset>
 		</form>
 	</div>

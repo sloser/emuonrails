@@ -2,6 +2,7 @@ class ArticlesController < ApplicationController
   
   before_filter :is_login
   layout "users"
+  uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit])
   
   LIMIT = 10
   
@@ -31,20 +32,22 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def new
-    @article = Article.new
+  def new    
+    @article    = Article.new
     @categories = Category.find :all, :select => 'id, title'
   end
 
   def edit
-    @article = Article.find(params[:id])
-    @categories = Category.find :all, :select => 'id, title'    
+    @article    = Article.find(params[:id])
+    @categories = Category.find :all, :select => 'id, title'
+    @tags       = @article.tag_list
   end
 
   def create    
     @article  = Article.new(params[:article])
     @image    = ArticlesImage.new(:uploaded_data => params[:image_name])
-    @service  = ArticleService.new(@article, @image)            
+    @tags     = params[:tags]
+    @service  = ArticleService.new(@article, @image, nil, @tags)            
     
     if @service.save
       redirect_to :action => "index"
@@ -56,8 +59,10 @@ class ArticlesController < ApplicationController
   def update
     @article_id     = params[:id]
     @article        = params[:article]
+    @tags           = params[:tags]
     @image          = ArticlesImage.new(:uploaded_data => params[:image_name])
-    @service        = ArticleService.new(@article, @image, @article_id)
+    
+    @service        = ArticleService.new(@article, @image, @article_id, @tags)   
     
     if @service.update        
       redirect_to :action => "index"
@@ -94,7 +99,7 @@ class ArticlesController < ApplicationController
         
     @articles = Article.find_all_active_articles(params[:page], LIMIT)
 		render :layout => false, :action => :index
-	end
+  end 
   
   private
   

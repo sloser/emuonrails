@@ -40,7 +40,8 @@ module WillPaginate
       ).push(associations::HasManyThroughAssociation).each do |klass|
         klass.class_eval do
           include Finder::ClassMethods
-          alias_method_chain :method_missing, :paginate
+          # Why it's here? sloser
+          #alias_method_chain :method_missing, :paginate
         end
       end
     end

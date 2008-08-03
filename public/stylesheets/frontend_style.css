@@ -2,7 +2,6 @@ html{margin: 0px; padding:0px;}
 body{font:62.5% Arial,Helvetica,sans-serif;margin:0px;padding:0px;}
 a{text-decoration:none;color: #000000;}
 
-h1, h2, form, ol, ul, li, dl, dt, dd {margin:0px; padding:0px; list-style:none}
 #nav h1{background-image: url(../images/admin/emusoft.gif);height: 116px;width: 90px;background-repeat: no-repeat;text-indent: -9999px;float: right;margin-right: 25px;}
 h2{
 	font-size: 220%;
@@ -11,6 +10,7 @@ h2{
 	padding-bottom: 15px;
 }
 h3{font-size: 140%;padding: 15px 0 5px 0;}
+p{font-size: 120%;padding: 5px 0 0 0;}
 
 .clr{clear:both;}
 .underline{text-decoration:underline}
@@ -272,7 +272,6 @@ ul#main li.titles, ul#main li.titles a{font-weight: bold;color: #9c0404;line-hei
 	color: #fff;
 	background-color: #9c0404;
 }
-
 
 .white{
 	color: #fff;

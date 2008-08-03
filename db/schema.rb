@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080730214245) do
+ActiveRecord::Schema.define(:version => 20080802144205) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -55,6 +55,35 @@ ActiveRecord::Schema.define(:version => 20080730214245) do
     t.string   "author"
     t.text     "content"
     t.integer  "article_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["taggable_id", "taggable_type"], :name => "index_taggings_on_taggable_id_and_taggable_type"
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "tiny_mce_photos", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id",      :limit => 11
+    t.string   "content_type"
+    t.string   "filename"
+    t.integer  "size",         :limit => 11
+    t.integer  "parent_id",    :limit => 11
+    t.string   "thumbnail"
+    t.integer  "width",        :limit => 11
+    t.integer  "height",       :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
   end

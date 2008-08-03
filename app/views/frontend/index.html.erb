@@ -3,6 +3,13 @@
 <ul>
 <% @categories.each do |c| %>
   <li><%= link_to c.title, c.category_code %></li>
+    <% unless c.children.empty? %>
+      <ul>
+        <% c.children.each do |sub| %>
+        <li><%= link_to sub.title, sub.category_code %></li>
+        <% end %>
+      </ul>
+    <% end %>
 <% end %>
 </ul>
 <h3>articles:</h3>
@@ -11,3 +18,9 @@
   <li><%= link_to a.title, "#{a.category.category_code}/#{a.article_code}" %></li>
 <% end %>
 </ul>
+
+<p> <% @tags.each do |tag| %>
+    [ <%= link_to tag.name, "/tag/#{tag.name}" %> ]
+	<% end %>
+</p>  
+

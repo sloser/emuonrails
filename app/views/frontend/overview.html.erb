@@ -1,8 +1,10 @@
 <h1>Overview</h1>
 <p><%= link_to 'homepage', '/' %></p>
-<h3>articles:</h3>
-<ul>
-<% @articles.each do |a| %>
-  <li><%= link_to a.title, "/#{a.category.category_code}/#{a.article_code}" %></li>
+<% unless @articles.empty? %>
+  <h3>articles:</h3>
+  <ul>
+  <% @articles.each do |a| %>
+    <li><%= link_to a.title, "/#{a.category.category_code}/#{a.article_code}" %></li>
+  <% end %>
+  </ul>
 <% end %>
-</ul>

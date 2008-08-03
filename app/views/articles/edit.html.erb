@@ -17,6 +17,9 @@
 
 <p><%= file_field_tag :image_name %></p>
 
+<p><label for="tags">Tags</label><br/>
+<%= text_field_tag :tags, @tags %></p>
+
 <p><label for="from_date">Date from</label><br/>
 <%= f.date_select :from_date %></p
 

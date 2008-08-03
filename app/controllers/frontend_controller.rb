@@ -1,26 +1,36 @@
-class FrontendController < ApplicationController
-
+class FrontendController < ApplicationController 
+  
   def index
     @categories = Category.roots
     @articles = Article.homepage_articles
+    @tags = Article.tag_counts
   end
 
-  def overview
-    @category = Category.find_by_category_code(params[:category_code])
-    render :template => 'frontend/error' if @category.nil?    
-    @articles = Article.category_articles(params[:category_code])
+  def overview    
+    if params[:tag]
+      @articles         = Article.find_tagged_with(params[:tag])      
+    else
+      @category = Category.find_by_category_code(params[:category_code])
+      render :template => 'frontend/error' if @category.nil?    
+      @articles = Article.category_articles(params[:category_code])
+    end
   end
 
   def view
     @article = Article.find_article(params[:category_code],params[:article_code])
     render :template => 'frontend/error' if @article.nil?
     
-    @reffer = request.env['REQUEST_URI']
+    @related_articles   = Article.find_related_articles(@article)
+    @catagory_articles  = Article.category_articles(params[:category_code], @article.id)
     
-    @comment = Comment.new    
+    @reffer   = request.env['REQUEST_URI']
+    
+    @comment  = Comment.new    
     @comments = Comment.find_all_by_article_id(@article.id, :order => 'id DESC')
     
-  end
+    @tags     = @article.tag_list
+    
+  end 
   
   def add_comment
     @comment = Comment.new(params[:comment])
@@ -28,6 +38,7 @@ class FrontendController < ApplicationController
     
     redirect_to params[:reffer]
     
-  end
+  end  
+
 
 end
