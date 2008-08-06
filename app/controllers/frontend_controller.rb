@@ -38,9 +38,14 @@ class FrontendController < ApplicationController
     @comment = Comment.new(params[:comment])
     @comment.save
     
-    redirect_to params[:reffer]
-    
-  end  
+    redirect_to params[:reffer]    
+  end
+  
+  def send_mail   
+    reffer = request.env['HTTP_REFERER']
+    Sender.deliver_send_to_friend(reffer)
+    redirect_to '/'    
+  end
 
 
 end

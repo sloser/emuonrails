@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.comment         '/frontend/add-comment',         :controller => 'frontend', :action => 'add_comment'
   map.tiny_mce        '/tiny_mce_photos',              :controller => 'tiny_mce_photos'
   map.tiny_mce_create '/tiny_mce_photos/create',       :controller => 'tiny_mce_photos', :action => 'create'
+  map.send_mail       '/sendmail',                     :controller => 'frontend', :action => 'send_mail'                     
   
   map.tag_overview    '/tag/:tag',                     :controller => 'frontend', :action => 'overview'
   map.overview        ':category_code',                :controller => 'frontend', :action => 'overview'
