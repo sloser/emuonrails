@@ -1,4 +1,6 @@
-class FrontendController < ApplicationController 
+class FrontendController < ApplicationController
+  
+  caches_page :view
   
   def index
     @categories = Category.roots
@@ -36,7 +38,11 @@ class FrontendController < ApplicationController
   
   def add_comment
     @comment = Comment.new(params[:comment])
-    @comment.save
+    
+    if @comment.save
+      # Expire the article page      
+      expire_page(params[:reffer])
+    end
     
     redirect_to params[:reffer]    
   end

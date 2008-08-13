@@ -68,6 +68,11 @@ class ArticlesController < ApplicationController
     @service        = ArticleService.new(@article, @image, @article_id, @tags)   
     
     if @service.update        
+      
+      # Expire the article page
+      category_alias = Category.find(@article['category_id']).title.create_alias
+      expire_page(:controller => category_alias, :action => @article['title'].create_alias)
+      
       redirect_to :action => "index"
     else
       render :action => "edit"    
