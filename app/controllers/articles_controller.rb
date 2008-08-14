@@ -65,13 +65,14 @@ class ArticlesController < ApplicationController
     @tags           = params[:tags][:tag].split(', ').map {|tag| tag.create_alias}
     @image          = ArticlesImage.new(:uploaded_data => params[:image_name])
     
-    @service        = ArticleService.new(@article, @image, @article_id, @tags)   
+    @service        = ArticleService.new(@article, @image, @article_id, @tags)
     
-    if @service.update        
-      
-      # Expire the article page
-      category_alias = Category.find(@article['category_id']).title.create_alias
-      expire_page(:controller => category_alias, :action => @article['title'].create_alias)
+    # Expire the article page, before we save article    
+    current_article = Article.find(@article_id)    
+    category_alias  = Category.find(current_article.category_id).category_code    
+    expire_page(:controller => category_alias, :action => current_article.article_code)
+    
+    if @service.update             
       
       redirect_to :action => "index"
     else
@@ -80,9 +81,15 @@ class ArticlesController < ApplicationController
   end
   
   def archive
-    article = Article.find(params[:id])    
+    article = Article.find(params[:id])      
+    
     article.show_forever = '0'
     article.save
+    
+    # Expire the article page, after article is archived
+    category_alias = Category.find(article.category_id).category_code    
+    expire_page(:controller => category_alias, :action => article.article_code)
+    
     redirect_to :action => "index", :ajax => 1 
   end
 
@@ -90,11 +97,22 @@ class ArticlesController < ApplicationController
     article = Article.find(params[:id])    
     article.show_forever = '1'
     article.save
+    
+    # Expire the article page, after article is dearchived ('coz 404 page can be cached)
+    category_alias = Category.find(article.category_id).category_code    
+    expire_page(:controller => category_alias, :action => article.article_code)
+    
     redirect_to :controller => "archive", :ajax => 1 
   end
 
   def delete
-    Article.delete(params[:id])    
+    article = Article.find(params[:id])
+    
+    # Expire the article page, before article is deleted
+    category_alias = Category.find(article.category_id).category_code    
+    expire_page(:controller => category_alias, :action => article.article_code)
+    
+    article.destroy    
     redirect_to :controller =>"archive", :ajax => 1
   end
   

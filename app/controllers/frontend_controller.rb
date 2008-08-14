@@ -14,25 +14,28 @@ class FrontendController < ApplicationController
     else
       @category = Category.find_by_category_code(params[:category_code])
       render :template => 'frontend/error' if @category.nil?    
-      @articles = Article.category_articles(params[:category_code])
+      @articles = Article.active.category_articles(params[:category_code])
     end
   end
 
   def view
-    @article = Article.find_article(params[:category_code],params[:article_code])
+    @article = Article.active.find_article(params[:category_code],params[:article_code])
     render :template => 'frontend/error' if @article.nil?
     
     @settings = Setting.first
     
-    @related_articles   = Article.find_related_articles(@article)
-    @catagory_articles  = Article.category_articles(params[:category_code], @article.id)
+    unless @article.nil?
+      @related_articles   = Article.find_related_articles(@article)
+      @catagory_articles  = Article.category_articles(params[:category_code], @article.id)
+      @reffer   = request.env['REQUEST_URI']
     
-    @reffer   = request.env['REQUEST_URI']
+      @comment  = Comment.new    
+      @comments = Comment.find_all_by_article_id(@article.id, :order => 'id DESC')
+      
+      @tags     = @article.tag_list
+    end   
     
-    @comment  = Comment.new    
-    @comments = Comment.find_all_by_article_id(@article.id, :order => 'id DESC')
     
-    @tags     = @article.tag_list
     
   end 
   
