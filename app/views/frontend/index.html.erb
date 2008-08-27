@@ -1,18 +1,7 @@
 <h1>homepage</h1>
-<div id="navigation">
+<div id="navigation"> 
   <h3>categories:</h3>
-  <ul>
-	<% @categories.each do |c| -%>
-	<li><%= link_to c.title, c.category_code %></li>
-	<% unless c.children.empty? -%>
-  <ul>
-	<% c.children.each do |sub| -%>
-	<li><%= link_to sub.title, sub.category_code %></li>
-	<% end -%>
-  </ul>
-	<% end -%>
-  <% end -%>
-  </ul>
+  <%= category_tree %>  
 </div>
 <div id="homepages_articles">
   <h3>articles:</h3>
