@@ -15,7 +15,7 @@ test:
 
 production:
   adapter: mysql  
-  database: db43127_emuonrails
-  host: internal-db.s43127.gridserver.com
-  username: db43127
-  password: 7iYj2JhW
+  database: emuonrails
+  host: localhost
+  username: root
+  password:
