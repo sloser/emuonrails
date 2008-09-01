@@ -13,7 +13,7 @@ ActiveRecord::Schema.define(:version => 20080803115904) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
-    t.integer  "category_id"
+    t.integer  "category_id",      :limit => 11
     t.string   "article_code"
     t.text     "lead"
     t.text     "content"
@@ -28,11 +28,11 @@ ActiveRecord::Schema.define(:version => 20080803115904) do
   end
 
   create_table "articles_images", :force => true do |t|
-    t.integer  "article_id"
-    t.integer  "parent_id"
-    t.integer  "size"
-    t.integer  "width"
-    t.integer  "height"
+    t.integer  "article_id",   :limit => 11
+    t.integer  "parent_id",    :limit => 11
+    t.integer  "size",         :limit => 11
+    t.integer  "width",        :limit => 11
+    t.integer  "height",       :limit => 11
     t.string   "content_type"
     t.string   "filename"
     t.string   "thumbnail"
@@ -42,9 +42,9 @@ ActiveRecord::Schema.define(:version => 20080803115904) do
 
   create_table "categories", :force => true do |t|
     t.string   "title"
-    t.integer  "parent_category_id"
+    t.integer  "parent_category_id", :limit => 11
     t.string   "category_code"
-    t.integer  "language_id"
+    t.integer  "language_id",        :limit => 11
     t.integer  "show_in_menu",       :limit => 1
     t.float    "disorder"
     t.datetime "created_at"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20080803115904) do
   create_table "comments", :force => true do |t|
     t.string   "author"
     t.text     "content"
-    t.integer  "article_id"
+    t.integer  "article_id", :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -68,14 +68,14 @@ ActiveRecord::Schema.define(:version => 20080803115904) do
   end
 
   create_table "taggings", :force => true do |t|
-    t.integer  "tag_id"
-    t.integer  "taggable_id"
+    t.integer  "tag_id",        :limit => 11
+    t.integer  "taggable_id",   :limit => 11
     t.string   "taggable_type"
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["taggable_id", "taggable_type"], :name => "index_taggings_on_taggable_id_and_taggable_type"
   add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type"], :name => "index_taggings_on_taggable_id_and_taggable_type"
 
   create_table "tags", :force => true do |t|
     t.string "name"
