@@ -6,7 +6,7 @@
 	<%= @article.content -%>
 	<p><%= @article.author %></p>
 	<p><%= @article.created_at %></p>
-	<%= show_image_for(@article) %>
+	<%= show_image_for(@article, 'l_thumb') %>
 	<div id="tags"> <% @tags.each do |tag| -%>
     [ <%= link_to tag, "/tag/#{tag}" %> ]
 	<% end -%>
