@@ -25,6 +25,9 @@ class FrontendController < ApplicationController
     @settings = Setting.first
     
     unless @article.nil?
+      
+      @files =  @article.articles_files
+      
       @related_articles   = Article.find_related_articles(@article)
       @catagory_articles  = Article.category_articles(params[:category_code], @article.id)
       @reffer   = request.env['REQUEST_URI']

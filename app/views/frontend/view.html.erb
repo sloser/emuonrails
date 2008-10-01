@@ -10,6 +10,14 @@
 	<div id="tags"> <% @tags.each do |tag| -%>
     [ <%= link_to tag, "/tag/#{tag}" %> ]
 	<% end -%>
+	<% unless @files.empty? %>
+		<p>Files:</p>
+		<ul>
+		<% @files.each do |file| %>
+			<li><a href="<%= file.public_filename %>"><%= file.filename %></a></li>		
+		<% end %>
+		</ul>
+	<% end %>
 </div>  	
 </div>
 

@@ -1,12 +1,13 @@
 class ArticleService
 
-	attr_reader :article, :image
+	attr_reader :article, :image, :file
 	
-	def initialize(article, image, article_id = nil, tags = nil)
+	def initialize(article, image, file, article_id = nil, tags = nil)
 		@article 		= article
 		@image 			= image
     @article_id = article_id
     @tags 			= tags
+    @file 			= file
 	end
 	
 	def save
@@ -17,14 +18,17 @@ class ArticleService
 				@article.articles_image.destroy if @article.articles_image
 				@image.article = @article
 				@image.save!
-			end			
+			end
+			if @file.valid?				
+				@file.article = @article
+				@file.save!
+			end
 			@article.show_forever = '1'
 			@article.article_code = @article.title.create_alias
 			
 			unless @tags.nil?
 				@article.tag_list = @tags
-			end
-			
+			end			
 			
 			@article.save!					
 			true
@@ -40,10 +44,16 @@ class ArticleService
 		Article.transaction do
 			if @image.valid?
 				current_article = Article.find @article_id
-				current_article.articles_image.destroy if current_article.articles_image
+				current_article.articles_image.destroy if current_article.articles_image				
 				@image.article = current_article
 				@image.save!
-			end			
+			end
+			
+			if @file.valid?
+				current_article ||= Article.find @article_id				
+				@file.article = current_article
+				@file.save!
+			end
 			
 			@article['article_code'] = @article['title'].create_alias			
 			Article.update(@article_id, @article)

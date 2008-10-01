@@ -43,14 +43,16 @@ class ArticlesController < ApplicationController
   def edit
     @article    = Article.find(params[:id])
     @categories = Category.find :all, :select => 'id, title'
+    @files      =  @article.articles_files
     @tags_value = @article.tag_list
   end
 
   def create    
     @article  = Article.new(params[:article])
     @image    = ArticlesImage.new(:uploaded_data => params[:image_name])
+    @file     = ArticlesFile.new(:uploaded_data => params[:file_name])
     @tags     = params[:tags][:tag].split(', ').map {|tag| tag.create_alias}
-    @service  = ArticleService.new(@article, @image, nil, @tags)            
+    @service  = ArticleService.new(@article, @image, @file, nil, @tags)            
     
     if @service.save
       redirect_to :action => "index"
@@ -64,16 +66,16 @@ class ArticlesController < ApplicationController
     @article        = params[:article]
     @tags           = params[:tags][:tag].split(', ').map {|tag| tag.create_alias}
     @image          = ArticlesImage.new(:uploaded_data => params[:image_name])
+    @file           = ArticlesFile.new(:uploaded_data => params[:file_name])
     
-    @service        = ArticleService.new(@article, @image, @article_id, @tags)
+    @service        = ArticleService.new(@article, @image, @file, @article_id, @tags)
     
     # Expire the article page, before we save article    
     current_article = Article.find(@article_id)    
     category_alias  = Category.find(current_article.category_id).category_code    
     expire_page(:controller => category_alias, :action => current_article.article_code)
     
-    if @service.update             
-      
+    if @service.update     
       redirect_to :action => "index"
     else
       render :action => "edit"    
@@ -114,6 +116,13 @@ class ArticlesController < ApplicationController
     
     article.destroy    
     redirect_to :controller =>"archive", :ajax => 1
+  end
+  
+  def delete_image
+    file = ArticlesFile.find(params[:id])
+    article_id = file.article_id
+    file.destroy    
+    redirect_to "/articles/" + article_id.to_s + '/' + 'edit'
   end
   
   def update_positions   

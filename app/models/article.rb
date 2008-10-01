@@ -3,6 +3,7 @@ class Article < ActiveRecord::Base
 	acts_as_taggable
 	
 	has_one 	:articles_image, :dependent => :destroy
+	has_many 	:articles_files, :dependent => :destroy
 	has_many 	:comments
 	
 	belongs_to 	:category,

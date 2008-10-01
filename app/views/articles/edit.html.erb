@@ -15,7 +15,19 @@
 <p><label for="author">Author</label><br/>
 <%= f.text_field :author %></p>
 
-<p><%= file_field_tag :image_name %></p>
+<p><label for="image_name">Image</label><br/>
+<%= file_field_tag :image_name %></p>
+
+<p><label for="file_name">File</label><br/>
+<%= file_field_tag :file_name %></p>
+<% unless @files.empty? %>
+	<p>Related Files:</p>
+	<ul>
+	<% @files.each do |file| %>
+		<li>[<%= link_to "delete", :controller => 'articles', :action => 'delete_image', :id => file.id %>] - <a href="<%= file.public_filename %>"><%= file.filename %></a></li>		
+	<% end %>
+	</ul>
+<% end %>
 
 <p><label for="tags">Tags</label><br/>
 <%= text_field_with_auto_complete :tags, :tag, {:value => @tags_value }, {:tokens => ', '} %>
